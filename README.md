@@ -32,6 +32,8 @@ Download all files in this repository, making sure to follow same folder schema 
 
 Run index.html in browser. 
 
+Copy of code can be found at https://github.com/KateJean225/CoxGithubDashboard
+
 ----------------------------------------------------------------------------------------------------------------------------------------
 
 # Technical Interview Homework: GitHub Dashboard

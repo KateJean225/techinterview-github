@@ -1,0 +1,97 @@
+<!--TITLE    -->
+<div class="row animated fadeIn">
+    <h3 style="margin-top: 10px"><strong>User-Specific Github Actions</strong></h3>
+    <h5><i>Type in a Github username to view information about a user's activity, repositories and coding languages. </i></h5>
+
+    <hr>
+
+</div>
+
+<div class="animated zoomInRight row">
+
+<!--Left Side User Panel-->
+    <div class="col-sm-4 col-md-4">
+        <div class="user-bio panel" style="color:whitesmoke;">
+            <div class="avatar col-sm-12">
+                <img src="{{ userinfo.avatar_url }}" class="thumbnail animated profile-pic">
+            </div>
+
+            <div class="title-name col-sm-12">
+                <div><a href="{{userinfo.html_url}}" target="_blank"><h3>{{ userinfo.login }}</h3></a></div>
+                <div><h5><smaller>{{ userinfo.name }}</smaller></h5></div>
+            </div>
+
+            <div class="bio-text col-sm-12">{{ userinfo.bio }}</div>
+
+
+
+
+
+            <div class="quick-info">
+                <div class="inner-p">
+                    <span class="label label-info">Joined Github</span>&nbsp;:&nbsp;{{ userinfo.created_at }}
+                </div>
+                <div class="inner-p">
+                    <span class="label label-info">Last Updated</span>&nbsp;:&nbsp; {{ userinfo.updated_at }}
+                </div>
+                <div class="inner-p">
+                    <span class="label label-info">Public Repos</span>&nbsp;:&nbsp; {{ userinfo.public_repos }}
+                </div>
+                <div class="inner-p">
+                    <span class="label label-info">Followers</span>&nbsp;:&nbsp; {{ userinfo.followers }}
+                </div>
+                <div class="inner-p">
+                    <span class="label label-info">Following</span>&nbsp;:&nbsp; {{ userinfo.following }}
+                </div>
+            </div>
+        </div>
+        <!--If no user of that login name, return message-->
+        <div ng-if="userinfo.message==='Not Found'">
+            <span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;No results found.</span>
+        </div>
+
+    </div>
+
+<!--Right Side User Panel-->
+    <div class="col-sm-8 col-md-8">
+        <div class="user-details panel panel-primary">
+            <div class="panel-heading" style="font-size:19px;"><strong>Select a Repository:</strong>
+                <div class="col-sm-6" style="float:right;font-size:medium;">
+                    <!-- NOTE: use ng-model and ng-repeat and don't clobber repo variable on scope -->
+                    <select id="repo-select" ng-model="repo" style="float:right; color:black">
+                        <option ng-repeat="r in repolist" id="repo{{ $index + 1 }}" ng-value="r.name">{{ r.name }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="panel-body">
+
+                <div class="col-sm-6">
+                    <div style="padding: 0px;" class="panel-success panel-heading"><h4><strong>Languages</strong></h4></div>
+                    <div class="language-results" id="language-select" style="height:400px; overflow-y:auto;">
+                        <li ng-repeat="(lang, cnt) in languages">
+                            <span id="{{ $index + 1 }}"><strong>{{ lang }}</strong>&nbsp;: &nbsp;{{cnt}}
+                            </span>
+                        </li>
+                        <li ng-if="languages.length===0">No languages found associated with this repository.</li>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <div style="padding: 0px;" class="panel-success panel-heading"><h4><strong>Events</strong></h4></div>
+                    <div class="event-results" id="event-select" style="height:400px; overflow-y:auto;">
+                        <li ng-repeat="event in eventinfo">
+                            <a id="{{ $index + 1 }}" value="{{ event.type }}"><strong>{{ event.type }}</strong><br>
+                            </a>{{ event.created_at }} <!--ng-click="update(movie)"-->
+                        </li>
+                        <li ng-if="eventinfo.length===0">No events found associated with this repository.</li>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+</div>

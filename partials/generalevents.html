@@ -1,0 +1,78 @@
+<!--TITLE    -->
+<div class="row animated fadeIn">
+    <h3 style="margin-top: 10px"><strong>Github Public Event Information</strong></h3>
+    <h5><i>Below is a feed of the 30 most recent Github public events. Filter or scroll to see specific events.
+        Click on a list item name to see more information. To refresh feed, click the refresh button. </i></h5>
+    <hr>
+</div>
+
+
+<div class="general-events-content row">
+
+<!--EVENT LISTING-->
+    <div class="event-list col-sm-12 col-md-12 animated slideInUp">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <span><b style="font-size: larger;">Top 30 Public Events</b></span>
+                <button type="button" id="myButton" data-loading-text="Loading..." class="btn btn-success btn-xs"
+                        style="float:right;" autocomplete="off">
+                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                </button>
+                <div style="float:right; padding-right: 1em;" class="input-group event-search">
+                    <input type="text" class="form-control" ng-model="searchString" ng-model-options="{ debounce: 800 }"placeholder="Input terms for filter...">
+                </div><!-- /input-group -->
+            </div>
+            <div class="panel-body public-events-container">
+                <!--<li class="btn public-event-results" ng-repeat="event in publicevents | filter: searchString " data-target="#collapseExample"> &lt;!&ndash;&ndash;&gt;-->
+                    <!--<span id="{{ $index + 1 }}" value="{{ event.type }}"><b>{{ event.type }}</b><br></span>-->
+                    <!--<span class="result-sub-style">{{ event.actor.login}}<br></span>-->
+                    <!--<span class="result-sub-style">{{ event.repo.name}}</span>-->
+                <!--</li>-->
+
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default" ng-repeat="event in publicevents | filter: searchString ">
+                        <div class="panel-heading" role="tab" id="heading{{ $index + 1 }}">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $index + 1 }}" aria-controls="collapse{{ $index + 1 }}">
+                                    <span id="{{ $index + 1 }}" value="{{ event.type }}"><b>{{ event.type }}</b><br></span>
+                                    <span class="result-sub-style">{{ event.actor.login}}<br></span>
+                                    <span class="result-sub-style">{{ event.repo.name}}</span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse{{ $index + 1 }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ $index + 1 }}">
+                            <div class="panel-body">
+                                <div class="">
+                                    <span class="sub-title"><h5><strong>ACTOR</strong></h5></span>
+                                    <div class="actor-content">
+                                        <div class="col-sm-2">
+                                            <span><img src="{{ event.actor.avatar_url }}" class="" style="width:50px;"></span>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <span><strong>Login:</strong>&nbsp; {{event.actor.login}} </span><br>
+                                            <span><strong>Date::</strong>&nbsp; {{event.created_at}} </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="">
+                                    <span class="sub-title"><h5><strong>REPO</strong></h5></span>
+                                    <span><strong>Repository:</strong>&nbsp; {{event.repo.name}}, {{event.repo.id}} </span>
+                                </div>
+                                <hr>
+                                <div class="">
+                                    <span class="sub-title"><h5><strong>PAYLOAD</strong></h5></span>
+                                    <span>{{event.payload}} </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

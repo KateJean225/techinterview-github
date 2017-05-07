@@ -17,7 +17,7 @@ By selecting a specific user repository, events per repository, as well as a lis
   - Toggle for Further Information
 - User-Specific Info Page
   - Per user, shows:  
-    - Bio and Information, with User avatar included
+    - Bio and Information, with user avatar included
     - Repositories 
     - Events per Repo
     - Languages Per Repo
